@@ -26,13 +26,14 @@ form = """
             }
         </style>
     </head>
-    
+    0
     <body>
       <h1 style='text-align:center'>Web Caesar</h1>
-      <form action="/converted", method=['GET']>
+      <form method = "post" action = "/converted">
+    
       <label for = "rot">Rotate by how many spots?</label>
-      <input id="rot" type="text" name="rot" />
-      <textarea id="text1" placeholder="Enter text here"></textarea>
+      <input id="rot" type="text" name="rot" value=0 />
+      <textarea type="text" name="text"></textarea>
       <input type="submit" value="Convert">
     </form></body>
 </html>
@@ -45,27 +46,56 @@ def index():
 
 
 converted_form = """
-  <!DOCTYPE html>
+    <!DOCTYPE html>
 
     <html>
     <head>
-        <h1>Converted Text</h1>
+        <style>
+            form {{
+                background-color: #eee;
+                padding: 20px;
+                margin: 0 auto;
+                width: 540px;
+                font: 16px sans-serif;
+                border-radius: 10px;
+            }}
+            textarea {{
+                margin: 10px 0;
+                width: 540px;
+                height: 120px;
+            }}
+        </style>
     </head>
+    
     <body>
-        <---something--->
-    </body>
-    </html>
+      <h1 style='text-align:center'>Web Caesar</h1>
+      <form method = "post" action = "/converted">
+    
+      <label for = "rot">Rotate by how many spots?</label>
+      <input id="rot" type="text" name="rot" value=0 />
+      <textarea name="text">{0}</textarea>
+      <input type="submit" value="Convert">
+    </form></body>
+</html>
 """
 
-@app.route("/converted", methods=['GET'])
+@app.route("/converted", methods=['POST'])
 def encrypt():
-    text1 = request.form['form']
-    rotation = 'rot'
-    text_to_convert1 = 'text1'
+    text2 = request.form['text']
+    rot2 = request.form['rot']
 
-    converted_text = rotate_string(text1, rot)
-    print (converted_text)
+    #if not rot.is_integer():
+    #   error message
+    #
 
-    return converted_form
+    converted_text = rotate_string(text2, rot2)
+
+
+
+
+
+    #sentence = "Your encoded text is: " + converted_text
+
+    return converted_form.format(converted_text)
 
 app.run()
