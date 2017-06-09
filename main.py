@@ -61,7 +61,7 @@ converted_form = """
 def encrypt():
     text1 = request.form['form']
     rotation = 'rot'
-    text_to_convert = 'text1'
+    text_to_convert1 = 'text1'
 
     converted_text = rotate_string(text1, rot)
     print (converted_text)
