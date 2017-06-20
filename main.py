@@ -5,47 +5,8 @@ app = Flask(__name__)
 app.config['DEBUG'] = True
 
 
+
 form = """
-    <!DOCTYPE html>
-
-    <html>
-    <head>
-        <style>
-            form {
-                background-color: #eee;
-                padding: 20px;
-                margin: 0 auto;
-                width: 540px;
-                font: 16px sans-serif;
-                border-radius: 10px;
-            }
-            textarea {
-                margin: 10px 0;
-                width: 540px;
-                height: 120px;
-            }
-        </style>
-    </head>
-    0
-    <body>
-      <h1 style='text-align:center'>Web Caesar</h1>
-      <form method = "post" action = "/converted">
-    
-      <label for = "rot">Rotate by how many spots?</label>
-      <input id="rot" type="text" name="rot" value=0 />
-      <textarea type="text" name="text"></textarea>
-      <input type="submit" value="Convert">
-    </form></body>
-</html>
-"""
-
-
-@app.route("/")
-def index():
-    return form
-
-
-converted_form = """
     <!DOCTYPE html>
 
     <html>
@@ -79,6 +40,17 @@ converted_form = """
 </html>
 """
 
+@app.route("/")
+def index():
+    
+
+    blank = ''
+
+    return form.format(blank)
+
+
+
+
 @app.route("/converted", methods=['POST'])
 def encrypt():
     text2 = request.form['text']
@@ -96,6 +68,6 @@ def encrypt():
 
     #sentence = "Your encoded text is: " + converted_text
 
-    return converted_form.format(converted_text)
+    return form.format(converted_text)
 
 app.run()
